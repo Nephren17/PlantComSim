@@ -9,8 +9,8 @@ class Section:
         self.y=y
         self.tem=temperature[0]
         self.hum=humidity[0]
-        self.sil_hum=10000
-        self.nut=100
+        self.sil_hum=1000
+        self.nut=1000
         self.plants=[]
         self.density=0
         
