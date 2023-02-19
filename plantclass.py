@@ -9,6 +9,10 @@ class Plant:
         self.h_max=0
         self.l_min=0
         self.l_max=0
+        self.life=0
+        self.water=0
+        self.repro_period=0
+        self.repro_eff=0
         self.color=""
         pass
 
@@ -22,6 +26,10 @@ class Cactus(Plant):   #仙人掌
         self.h_max=0.4
         self.l_min=2000
         self.l_max=8000
+        self.life=1000
+        self.water=1000
+        self.repro_period=3 #Years are set as the unit for reproduction period
+        self.repro_eff=20 #The value represent how many seed are likely to grow up in one cycle
         self.color="#6abe83"
 
 class Arteannuin(Plant):  #黄花蒿 
@@ -34,6 +42,11 @@ class Arteannuin(Plant):  #黄花蒿
         self.h_max=0.8
         self.l_min=500
         self.l_max=2000
+        self.life=100
+        self.water=100
+        self.repro_period=0.3333
+        self.repro_eff=30
+        self.color="#6abe83"
         self.color="#F0D879"
 
 class Hippophae(Plant):  #沙棘 
@@ -46,6 +59,10 @@ class Hippophae(Plant):  #沙棘
         self.h_max=0.8
         self.l_min=1000
         self.l_max=2000
+        self.life=700
+        self.water=500
+        self.repro_period=3
+        self.repro_eff=10
         self.color="#F78D3F"
 
 class Poplar(Plant):  #胡杨
@@ -58,6 +75,10 @@ class Poplar(Plant):  #胡杨
         self.h_max=0.7
         self.l_min=500
         self.l_max=2000
+        self.life=20000
+        self.water=20000
+        self.repro_period=8
+        self.repro_eff=1
         self.color="#248888"
 
 cac = Cactus(2,3)
