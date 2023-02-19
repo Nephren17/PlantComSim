@@ -2,6 +2,7 @@ from plantclass import *
 from world import *
 from typing import List
 import math
+import random
 
 class Climate:
     def __init__(self,hum,tem) -> None:
@@ -19,7 +20,7 @@ class Climate:
 def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Plant]):
     
     # Soil Nutrient
-    HP = plant.life + 0.1 * (section.nut)
+    HP = plant.life + 0.05 * (section.nut) 
     
     # Local Temperature
     if plant.t_min > section.tem:
@@ -29,7 +30,7 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
 
     # Water Point
     if plant.water < 0.6 * plant.water_max:
-        HP = HP *(1 - 0.5 * (0.6 * plant.water_max - plant.water) / plant.water_max )
+        HP = HP + (plant.water - 0.6 * plant.water_max) * 20
 
 
     # Plant to Plant Interaction
@@ -37,23 +38,31 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
     for sp in surrounding_Plants:
         if sp.name == "Argy" and plant.name != "Argy":
             HP = HP - 20
+        if sp.name == "Argy" and plant.name == "Argy":
+            HP = HP + 10
 
     # Environmental damage
     env_dam_reduce = 0
     for sp in surrounding_Plants:
         if sp.name == "Cactus" or sp.name == "Thorn":
             env_dam_reduce = env_dam_reduce + 1
+<<<<<<< HEAD
     HP = HP - min (120, 0.1 * HP * (1-(math.atan(env_dam_reduce)*2 / math.pi)*0.5))
+=======
+    HP = HP - max (20, 0.05 * HP * (1-(math.atan(env_dam_reduce)*2 / math.pi)*0.5))
+>>>>>>> d42dfff97f6b9f697237825b6701f56cd80a9b6f
 
     return HP
 
 def WaterPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Plant]):
-    
+
     # Soil Humidity and Surrounding Humidity
-    WP = min(plant.water +  0.3 * section.hum, plant.water_max)
+    WP = plant.water
+    # Daily Consumption
+    WP = WP - plant.water_consume *100
 
     # Local Temperature
-    WP = WP - 4 * max(0, section.tem)
+    WP = WP - 400 * max(0, section.tem)
 
     #  Soil Humidity
     desired_total_water = plant.water_max - plant.water
@@ -66,26 +75,66 @@ def WaterPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Pl
     else:
         WP = plant.water + (plant.water_max / total_water_max) * 0.4 * section.sil_hum
 
-    return WP
+    return max(WP, 0)
 
 #Local(k+1) = Local(k) + Climate->Local + Plant->Local
 
 def SoilHumidityIteration(section:Section, climate:Climate):
     
     # Climate Precipitation
-    SH = section.sil_hum + climate.hum//100
+    SoH = section.sil_hum + climate.hum//100
 
     # Reproduction
 
-    # Plant Density
-    SH = SH - section.density * 1
 
     # Climate Temperature
-    SH = SH - 4 * max(0, climate.tem - 30)
+    SoH = SoH - 40 * max(0, climate.tem - 10)
 
     # Plant Water Point
+    desired_total_water = 0
+    for sp in section.plants:
+        desired_total_water = desired_total_water + sp.water_max - sp.water
+    SoH = SoH - max(0.4 * section.sil_hum, desired_total_water)
 
     # Plant Function
+    for sp in section.plants:
+        if (sp.name == "Locust" or sp.name == "Poplar") and section.sil_hum < 6000:
+            SoH = SoH + 0.04 * sp.water
 
+    return SoH
 
-    return SH
+def SurroundingHumidityIteration(section:Section, climate:Climate):
+    
+    # Climate Precipitations
+    SuH = section.hum + 0.15 * climate.hum
+    
+    # Plant Density
+    SuH = SuH * (1 - 0.5 * (2 / math.pi) * math.atan(section.density / 100000))
+
+    # Climate Humidity
+    SuH = 0.9 * SuH + 0.1 * climate.hum
+
+    return SuH
+
+def SoilNutrientIteration(section:Section, climate:Climate):
+    # Plant Death
+
+    # Plant Reproduction
+
+    # Plant consumption
+    SN = SN * (1- 0.4 * (2 / math.pi) * math.atan(section.density / 3000))
+
+    #Plant Function
+    for sp in section.plants:
+        if sp.name == "Locust" or sp.name == "Stipa":
+            SN = SN + 0.3 * sp.life
+
+    # Daily Complement
+    SN = SN + 1000
+    
+    return SN
+
+def spawn(plant:Plant,world:World,tik:int):
+    if plant.age % plant.repro_period == 0:
+        dx = random.uniform(-1,1)*10
+        dy = random.uniform(-1,1)*10

@@ -79,8 +79,8 @@ class Cactus(Plant):   #仙人掌
         self.water=1500
         self.water_max=1500
         self.repro_period=40
-        self.water_consume=30
-        self.soil_consume=30
+        self.water_consume=15
+        self.soil_consume=15
         self.color="#6abe83"
 
 class Hippophae(Plant):  #沙棘 
@@ -97,8 +97,8 @@ class Hippophae(Plant):  #沙棘
         self.water=100
         self.water_max=100
         self.repro_period=20
-        self.water_consume=3
-        self.soil_consume=3
+        self.water_consume=1
+        self.soil_consume=2
         self.color="#F78D3F"
 
 class Thorn(Plant):  #荆条
@@ -115,8 +115,8 @@ class Thorn(Plant):  #荆条
         self.water=100
         self.water_max=100
         self.repro_period=20
-        self.water_consume=3
-        self.soil_consume=3
+        self.water_consume=1
+        self.soil_consume=2
         self.color="#393939"
 
 
@@ -135,9 +135,9 @@ class Stipa(Plant):   #针茅
         self.life=100
         self.water=120
         self.water_max=120
-        self.repro_period=2.5
-        self.water_consume=5
-        self.soil_consume=5
+        self.repro_period=4
+        self.water_consume=2
+        self.soil_consume=3
         self.color="#FF5A09"
 
 class Villous_themeda(Plant):   #菅子草
@@ -230,7 +230,7 @@ class Crofton_weed(Plant):  #紫茎泽兰
         self.life=140
         self.water=120
         self.water_max=120
-        self.repro_period= 1.2
+        self.repro_period= 2
         self.water_consume=8
         self.soil_consume=8
         self.color="#7FFFD4"
