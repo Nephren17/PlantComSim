@@ -92,7 +92,7 @@ def SoilHumidityIteration(section:Section, climate:Climate):
     desired_total_water = 0
     for sp in section.plants:
         desired_total_water = desired_total_water + sp.water_max - sp.water
-    SoH = SoH - max(0.4 * section.sil_hum, desired_total_water)
+    SoH = SoH - min(0.4 * section.sil_hum, desired_total_water)
 
     # Plant Function
     for sp in section.plants:

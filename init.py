@@ -85,8 +85,15 @@ def init(n):
     world.update_sec()
     return world
     #world.debug_sec(0,0)
-    
-    
+
+def init_sp(list):
+    points = generate_points(len(list))
+    plants=[]
+    for i in range(len(list)):
+        plants.append(gen_plant(list[i],points[i],2))
+    world = World(plants=plants)
+    world.update_sec()
+    return world
 #vis(plants=plants,line=True)
 
 

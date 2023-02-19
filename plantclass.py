@@ -29,7 +29,8 @@ class Plant:
 
     def death(self):
         print("Plant " + self.name + " died at age" + str(self.age))
-        self.debug()
+        #self.debug()
+        return
 
     def debug(self):
         print(self.life,self.water)
