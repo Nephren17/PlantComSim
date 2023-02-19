@@ -1,10 +1,15 @@
 import matplotlib.pyplot as plt
+from waether_sim import simulate_tropical_savanna_climate_daily
+from typing import List
+from plantclass import Plant
+temperature,humidity,_ = simulate_tropical_savanna_climate_daily()
 class Section:
     def __init__(self,x,y) -> None:
         self.x=x
         self.y=y
-        self.hum=100
-        self.sil_hum=100
+        self.tem=temperature[0]
+        self.hum=humidity[0]
+        self.sil_hum=50
         self.nut=100
         self.plants=[]
         self.density=0
@@ -34,7 +39,7 @@ class Section:
 
 
 class World:
-    def __init__(self,plants,rows=100,cols=100) -> None:
+    def __init__(self,plants:List[Plant],rows=100,cols=100) -> None:
         self.rows=rows
         self.cols=cols
         self.time=0
