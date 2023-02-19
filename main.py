@@ -52,14 +52,6 @@ while 1:
 
     tik = tik + 1
     
-    if tik == 50:
-        world.vis(fname=str(tik))
-    if tik == 100:
-        world.vis(fname=str(tik))
-    if tik == 150:
-        world.vis(fname=str(tik))
-    if tik == 200:
-        world.vis(fname=str(tik))
 
     if tik > 1000 or len(world.plants)==0 :
         break
