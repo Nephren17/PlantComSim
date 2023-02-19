@@ -4,6 +4,7 @@ class Plant:
         self.y = y
         self.r = r
         self.name = ""
+        self.age=0
         self.t_min=0
         self.t_max=0
         self.h_min=0
@@ -18,6 +19,22 @@ class Plant:
         self.color=""
         pass
 
+    def age_(self):          #判断生长条件并更新属性
+        if self.life <= 0:
+            self.death()
+        else:
+            self.age = self.age + 1
+
+    def death(self):
+        print("Plant " + self.name + "died at age" + str(self.age))
+
+    def get_sec(self) -> int :
+        out = 10*(self.x//10) + self.y//10
+        return out
+
+    def hit(self,n) :
+        self.life = self.life - n
+        
     def __lt__(self, other):
         # 比较运算符
         return (self.x, self.y) < (other.x, other.y)
@@ -37,6 +54,8 @@ class Plant:
     
     def __len__(self):
         return 2
+    
+
 
 class Cactus(Plant):   #仙人掌
     def __init__(self, x, y, r=3) -> None:

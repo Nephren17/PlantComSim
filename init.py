@@ -67,21 +67,26 @@ def vis(plants,line=False,collection=["Cactus","Hippophae","Thorn","Stipa"]):
     plt.ylim(0,100)
     ax = plt.gca()
     ax.set_aspect('equal')
+    plt.show()
     plt.savefig("distribution.png")
 
 
+#os.system('export DISPLAY=:0.0')
+def init(n):
+    points = generate_points(n)  # generate 50 random plants
+    plants=[]
+    for point in points:
+        idx = np.random.randint(1,5)
+        plant = gen_plant(idx,point,2)
+        plants.append(plant)
+    plant_tree = kdtree.create(plants)  #kdtree 数据结构存储plant信息，便于计算相隔距离
 
-points = generate_points(50)  # generate 50 random plants
-plants=[]
-for point in points:
-    idx = np.random.randint(1,5)
-    plant = gen_plant(idx,point,2)
-    plants.append(plant)
-plant_tree = kdtree.create(plants)  #kdtree 数据结构存储plant信息，便于计算相隔距离
-
-world = World(plants=plants)
-world.update_sec()
-world.debug_sec(0,0)
-vis(plants=plants,line=True)
+    world = World(plants=plants)
+    world.update_sec()
+    return world
+    #world.debug_sec(0,0)
+    
+    
+#vis(plants=plants,line=True)
 
 
