@@ -39,9 +39,11 @@ def gen_plant(n,point,r=3):
     elif n==2:
         plant=Hippophae(x,y)
     elif n==3:
-        plant=Thorn(x,y)
+        plant=Poplar(x,y)
     elif n==4:
         plant=Stipa(x,y)
+    elif n==5:
+        plant=Argy(x,y)
     else:
         plant=Cactus(x,y)
     
@@ -76,7 +78,7 @@ def init(n):
     points = generate_points(n)  # generate 50 random plants
     plants=[]
     for point in points:
-        idx = np.random.randint(1,5)
+        idx = np.random.randint(1,6)
         plant = gen_plant(idx,point,2)
         plants.append(plant)
     plant_tree = kdtree.create(plants)  #kdtree 数据结构存储plant信息，便于计算相隔距离
