@@ -12,6 +12,7 @@ class Plant:
         self.l_max=0
         self.life=0
         self.water=0
+        self.water_max=0
         self.repro_period=0
         self.repro_eff=0
         self.color=""
@@ -49,6 +50,7 @@ class Cactus(Plant):   #仙人掌
         self.l_max=8000
         self.life=1000
         self.water=1500
+        self.water_max=1500
         self.repro_period=40
         self.water_consume=30
         self.soil_consume=30
@@ -66,6 +68,7 @@ class Hippophae(Plant):  #沙棘
         self.l_max=2000
         self.life=150
         self.water=100
+        self.water_max=100
         self.repro_period=20
         self.water_consume=3
         self.soil_consume=3
@@ -83,6 +86,7 @@ class Thorn(Plant):  #荆条
         self.l_max=60000
         self.life=150
         self.water=100
+        self.water_max=100
         self.repro_period=20
         self.water_consume=3
         self.soil_consume=3
@@ -103,6 +107,7 @@ class Stipa(Plant):   #针茅
         self.l_max=5000
         self.life=100
         self.water=120
+        self.water_max=120
         self.repro_period=2.5
         self.water_consume=5
         self.soil_consume=5
@@ -120,6 +125,7 @@ class Villous_themeda(Plant):   #菅子草
         self.l_max=4000
         self.life=100
         self.water=120
+        self.water_max=120
         self.repro_period=4
         self.water_consume=5
         self.soil_consume=5
@@ -139,6 +145,7 @@ class Arteannuin(Plant):  #黄花蒿
         self.l_max=2000
         self.life=200
         self.water=150
+        self.water_max=150
         self.repro_period=3
         self.water_consume=6
         self.soil_consume=6
@@ -158,6 +165,7 @@ class Poplar(Plant):  #胡杨
         self.l_max=2000
         self.life=16000
         self.water=9000
+        self.water_max=9000
         self.repro_period=10000000
         self.water_consume=150
         self.soil_consume=120
@@ -175,6 +183,7 @@ class Argy(Plant):  #艾草
         self.l_max=2500
         self.life=100
         self.water=100
+        self.water_max=100
         self.repro_period=4
         self.water_consume=5
         self.soil_consume=5
@@ -193,6 +202,7 @@ class Crofton_weed(Plant):  #紫茎泽兰
         self.l_max=5000
         self.life=140
         self.water=120
+        self.water_max=120
         self.repro_period= 1.2
         self.water_consume=8
         self.soil_consume=8
@@ -210,6 +220,7 @@ class Leymus_chinensis(Plant):  #羊草
         self.l_max=2000
         self.life=100
         self.water=100
+        self.water_max=100
         self.repro_period=4
         self.water_consume=5
         self.soil_consume=5
@@ -228,6 +239,7 @@ class Locust(Plant):  #刺槐
         self.l_max=3000
         self.life=14000
         self.water=15000
+        self.water_max=15000
         self.repro_period=6
         self.water_consume=150
         self.soil_consume=150
@@ -247,6 +259,7 @@ class Chinese_pennisetum(Plant):  #狼尾草
         self.l_max=60000
         self.life=100
         self.water=100
+        self.water_max=100
         self.repro_period=6
         self.water_consume=5
         self.soil_consume=5
@@ -264,6 +277,7 @@ class Conyza_canadensis(Plant):  #飞蓬
         self.l_max=2000
         self.life=100
         self.water=100
+        self.water_max=100
         self.repro_period=6
         self.water_consume=6
         self.soil_consume=6
