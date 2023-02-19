@@ -47,17 +47,22 @@ def gen_plant(n,point,r=3):
     
     return plant
 
-def vis(plants,line=False):
-    plt.figure(dpi=300).set_size_inches(7,7)
+def vis(plants,line=False,collection=["Cactus","Arteannuin","Hippophae","Poplar"]):
+    plt.figure(dpi=300).set_size_inches(10,8)
     for plant in plants:
-        plt.scatter(plant.x,plant.y,c=plant.color,label=plant.name)
+        if plant.name in collection:
+            plt.scatter(plant.x,plant.y,c=plant.color,label=plant.name)
+            collection.remove(plant.name)
+        else:
+            plt.scatter(plant.x,plant.y,c=plant.color)
+
     if line == True:
         for i in range(0,10):
             plt.axhline(y=i*10,color='#d9d9f3', linestyle='--')
             plt.axvline(x=i*10,color='#d9d9f3', linestyle='--')
 
     plt.title("Distribution")
-    #plt.legend()
+    plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left') 
     plt.xlim(0,100)
     plt.ylim(0,100)
     ax = plt.gca()
