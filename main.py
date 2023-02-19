@@ -48,13 +48,18 @@ while 1:
     #world.update_sec()
 
     tik = tik + 1
+    if tik == 50:
+        world.vis(line=True)
+    if tik == 100:
+        world.vis(line=True)
+    if tik == 150:
+        world.vis(line=True)
+    if tik == 200:
+        world.vis(line=True)
+    if tik == 250:
+        world.vis(line=True)
     if tik > 300:
         break
 
 world.vis(line=True)
-
-
-
-    
-    
 

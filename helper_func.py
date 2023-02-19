@@ -37,13 +37,15 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
     for sp in surrounding_Plants:
         if sp.name == "Argy" and plant.name != "Argy":
             HP = HP - 20
+        if sp.name == "Argy" and plant.name == "Argy":
+            HP = HP + 20
 
     # Environmental damage
     env_dam_reduce = 0
     for sp in surrounding_Plants:
         if sp.name == "Cactus" or sp.name == "Thorn":
             env_dam_reduce = env_dam_reduce + 1
-    HP = HP - max (100, 0.1 * HP * (1-(math.atan(env_dam_reduce)*2 / math.pi)*0.5))
+    HP = HP - min (120, 0.1 * HP * (1-(math.atan(env_dam_reduce)*2 / math.pi)*0.5))
 
     return HP
 
