@@ -75,9 +75,9 @@ class Cactus(Plant):   #仙人掌
         self.h_max=40
         self.l_min=2000
         self.l_max=8000
-        self.life=1000
-        self.water=1500
-        self.water_max=1500
+        self.life=900
+        self.water=1600
+        self.water_max=1600
         self.repro_period=40
         self.water_consume=15
         self.soil_consume=15
@@ -111,8 +111,8 @@ class Thorn(Plant):  #荆条
         self.h_max=80
         self.l_min=2000
         self.l_max=60000
-        self.life=150
-        self.water=100
+        self.life=300
+        self.water=150
         self.water_max=100
         self.repro_period=20
         self.water_consume=1

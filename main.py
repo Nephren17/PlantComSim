@@ -53,38 +53,22 @@ while 1:
 
     tik = tik + 1
 
-    if tik == 10:
-        world.vis(fname="10",collection=["Cactus","Hippophae","Thorn","Stipa"])
+    if tik == 100:
+        world.vis(fname="100",collection=["Cactus","Hippophae","Thorn","Stipa"])
 
-    if tik == 20:
-        world.vis(fname="20",collection=["Cactus","Hippophae","Thorn","Stipa"])
+    if tik == 200:
+        world.vis(fname="200",collection=["Cactus","Hippophae","Thorn","Stipa"])
 
-    if tik == 26:
-        world.vis(fname="26",collection=["Cactus","Hippophae","Thorn","Stipa"])
 
-    if tik == 27:
-        world.vis(fname="27",collection=["Cactus","Hippophae","Thorn","Stipa"])
-
-    if tik == 28:
-        world.vis(fname="28",collection=["Cactus","Hippophae","Thorn","Stipa"])
-
-    if tik == 30:
-        world.vis(fname="30",collection=["Cactus","Hippophae","Thorn","Stipa"])
-
-    if tik == 29:
-        world.vis(fname="29",collection=["Cactus","Hippophae","Thorn","Stipa"])
-    
-    
     if tik > 300 or len(world.plants)==0 :
         break
 
-<<<<<<< HEAD
-=======
+
 world.vis(fname="final",collection=["Cactus","Hippophae","Thorn","Stipa"])
 
 
 
     
     
->>>>>>> d42dfff97f6b9f697237825b6701f56cd80a9b6f
+
 

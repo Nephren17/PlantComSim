@@ -17,10 +17,11 @@ class Climate:
         self.diurnal=0
         pass
 
+
 def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Plant]):
     
     # Soil Nutrient
-    HP = plant.life + 0.05 * (section.nut) 
+    HP = plant.life + 0.05 * (section.nut) + random.randint(-65, 0)
     
     # Local Temperature
     if plant.t_min > section.tem:
@@ -29,8 +30,8 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
         HP = HP + 20 * (plant.t_max - section.tem)
 
     # Water Point
-    if plant.water < 0.6 * plant.water_max:
-        HP = HP + (plant.water - 0.6 * plant.water_max) * 20
+    if plant.water < 0.7 * plant.water_max:
+        HP = HP + (plant.water - 0.7 * plant.water_max) * 20
 
 
     # Plant to Plant Interaction
@@ -46,18 +47,15 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
     for sp in surrounding_Plants:
         if sp.name == "Cactus" or sp.name == "Thorn":
             env_dam_reduce = env_dam_reduce + 1
-<<<<<<< HEAD
-    HP = HP - min (120, 0.1 * HP * (1-(math.atan(env_dam_reduce)*2 / math.pi)*0.5))
-=======
     HP = HP - max (20, 0.05 * HP * (1-(math.atan(env_dam_reduce)*2 / math.pi)*0.5))
->>>>>>> d42dfff97f6b9f697237825b6701f56cd80a9b6f
+
 
     return HP
 
 def WaterPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Plant]):
 
     # Soil Humidity and Surrounding Humidity
-    WP = plant.water
+    WP = plant.water - random.randint(-180, 0)
     # Daily Consumption
     WP = WP - plant.water_consume *100
 
