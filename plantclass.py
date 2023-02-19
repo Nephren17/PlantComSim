@@ -15,26 +15,31 @@ class Plant:
         self.water=0
         self.water_max=0
         self.repro_period=0
-        self.repro_eff=0
         self.color=""
         pass
 
     def age_(self):          #判断生长条件并更新属性
         if self.life <= 0:
             self.death()
+            return False
         else:
             self.age = self.age + 1
+            return True
 
     def death(self):
         print("Plant " + self.name + "died at age" + str(self.age))
+        self.debug()
+
+    def debug(self):
+        print(self.life,self.water)
 
     def get_sec(self) -> int :
-        out = 10*(self.x//10) + self.y//10
+        out = int(10*(self.x//10) + self.y//10)
         return out
 
     def hit(self,n) :
         self.life = self.life - n
-        
+
     def __lt__(self, other):
         # 比较运算符
         return (self.x, self.y) < (other.x, other.y)
@@ -63,8 +68,8 @@ class Cactus(Plant):   #仙人掌
         self.name="Cactus"
         self.t_min=4
         self.t_max=45
-        self.h_min=0.2
-        self.h_max=0.4
+        self.h_min=20
+        self.h_max=40
         self.l_min=2000
         self.l_max=8000
         self.life=1000
@@ -81,8 +86,8 @@ class Hippophae(Plant):  #沙棘
         self.name="Hippophae"
         self.t_min=-40
         self.t_max=40
-        self.h_min=0.2
-        self.h_max=0.8
+        self.h_min=20
+        self.h_max=80
         self.l_min=1000
         self.l_max=2000
         self.life=150
@@ -99,8 +104,8 @@ class Thorn(Plant):  #荆条
         self.name="Thorn"
         self.t_min=-20
         self.t_max=30
-        self.h_min=0.4
-        self.h_max=0.8
+        self.h_min=40
+        self.h_max=80
         self.l_min=2000
         self.l_max=60000
         self.life=150
@@ -120,8 +125,8 @@ class Stipa(Plant):   #针茅
         self.name="Stipa"
         self.t_min=-25
         self.t_max=40
-        self.h_min=0.1
-        self.h_max=0.8
+        self.h_min=10
+        self.h_max=80
         self.l_min=1500
         self.l_max=5000
         self.life=100
@@ -138,8 +143,8 @@ class Villous_themeda(Plant):   #菅子草
         self.name="Villous_themeda"
         self.t_min=-6
         self.t_max=32
-        self.h_min=0.3
-        self.h_max=0.7
+        self.h_min=30
+        self.h_max=70
         self.l_min=1000
         self.l_max=4000
         self.life=100
@@ -158,8 +163,8 @@ class Arteannuin(Plant):  #黄花蒿
         self.name="Arteannuin"
         self.t_min=-20
         self.t_max=35
-        self.h_min=0.3
-        self.h_max=0.8
+        self.h_min=30
+        self.h_max=80
         self.l_min=500
         self.l_max=2000
         self.life=200
@@ -178,8 +183,8 @@ class Poplar(Plant):  #胡杨
         self.name="Poplar"
         self.t_min=-30
         self.t_max=40
-        self.h_min=0.15
-        self.h_max=0.7
+        self.h_min=15
+        self.h_max=70
         self.l_min=500
         self.l_max=2000
         self.life=16000
@@ -196,8 +201,8 @@ class Argy(Plant):  #艾草
         self.name="Argy"
         self.t_min=-15
         self.t_max=35
-        self.h_min=0.4
-        self.h_max=0.7
+        self.h_min=40
+        self.h_max=70
         self.l_min=400
         self.l_max=2500
         self.life=100
@@ -215,8 +220,8 @@ class Crofton_weed(Plant):  #紫茎泽兰
         self.name="Crofton_weed"
         self.t_min=-5
         self.t_max=30
-        self.h_min=0.3
-        self.h_max=0.8
+        self.h_min=30
+        self.h_max=80
         self.l_min=1000
         self.l_max=5000
         self.life=140
@@ -233,8 +238,8 @@ class Leymus_chinensis(Plant):  #羊草
         self.name="Leymus_chinensis"
         self.t_min=-20
         self.t_max=35
-        self.h_min=0.3
-        self.h_max=0.8
+        self.h_min=30
+        self.h_max=80
         self.l_min=500
         self.l_max=2000
         self.life=100
@@ -252,8 +257,8 @@ class Locust(Plant):  #刺槐
         self.name="Locust"
         self.t_min=-25
         self.t_max=35
-        self.h_min=0.3
-        self.h_max=0.8
+        self.h_min=30
+        self.h_max=80
         self.l_min=500
         self.l_max=3000
         self.life=14000
@@ -272,8 +277,8 @@ class Chinese_pennisetum(Plant):  #狼尾草
         self.name="Chinese_pennisetum"
         self.t_min=-15
         self.t_max=35
-        self.h_min=0.3
-        self.h_max=0.7
+        self.h_min=30
+        self.h_max=70
         self.l_min=3000
         self.l_max=60000
         self.life=100
@@ -290,8 +295,8 @@ class Conyza_canadensis(Plant):  #飞蓬
         self.name="Conyza_canadensis"
         self.t_min=-10
         self.t_max=35
-        self.h_min=0.2
-        self.h_max=0.7
+        self.h_min=20
+        self.h_max=70
         self.l_min=500
         self.l_max=2000
         self.life=100
