@@ -23,9 +23,9 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
     
     # Local Temperature
     if plant.t_min > section.tem:
-        HP = HP - 10 * (plant.t_min - section.tem)
+        HP = HP - 20 * (plant.t_min - section.tem)
     elif plant.t_max < section.tem:
-        HP = HP + 10 * (plant.t_max - section.tem)
+        HP = HP + 20 * (plant.t_max - section.tem)
 
     # Water Point
     if plant.water < 0.6 * plant.water_max:
@@ -43,7 +43,7 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
     for sp in surrounding_Plants:
         if sp.name == "Cactus" or sp.name == "Thorn":
             env_dam_reduce = env_dam_reduce + 1
-    HP = HP - min (100, 0.1 * HP * (1-(math.atan(env_dam_reduce)*2 / math.pi)*0.5))
+    HP = HP - min (120, 0.1 * HP * (1-(math.atan(env_dam_reduce)*2 / math.pi)*0.5))
 
     return HP
 
