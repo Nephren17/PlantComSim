@@ -11,7 +11,7 @@ from helper_func import *
 
 
 temperature,humidity,_ = simulate_tropical_savanna_climate_daily()
-world=init(100)
+world=init(50)
 tik = 0
 
 temp_hp_loss=0
@@ -29,7 +29,10 @@ def plant_itr(plant:Plant):
 def plants_iteration():
     for plant in world.plants:
         plant_itr(plant)
-        plant.age_()
+        if plant.age_() == False:
+            world.plants.remove(plant)
+    #print("At time " + str(tik) + " there are " + str(len(world.plants)) + " left")
+        
 
 def sec_itr(section:Section,climate:Climate):
     section.sil_hum=SoilHumidityIteration(section=section,climate=climate)
@@ -48,10 +51,20 @@ while 1:
     #world.update_sec()
 
     tik = tik + 1
-    if tik > 300:
+    
+    if tik == 50:
+        world.vis(fname=str(tik))
+    if tik == 100:
+        world.vis(fname=str(tik))
+    if tik == 150:
+        world.vis(fname=str(tik))
+    if tik == 200:
+        world.vis(fname=str(tik))
+
+    if tik > 1000 or len(world.plants)==0 :
         break
 
-world.vis(line=True)
+
 
 
 

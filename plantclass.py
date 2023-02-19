@@ -21,13 +21,14 @@ class Plant:
     def age_(self):          #判断生长条件并更新属性
         if self.life <= 0:
             self.death()
+            self.age = -1
             return False
         else:
             self.age = self.age + 1
             return True
 
     def death(self):
-        print("Plant " + self.name + "died at age" + str(self.age))
+        print("Plant " + self.name + " died at age" + str(self.age))
         self.debug()
 
     def debug(self):
@@ -60,6 +61,8 @@ class Plant:
     def __len__(self):
         return 2
     
+    def __eq__(self, other) -> bool:
+        return self.name == other.name and self.x == other.x and self.y == other.y and self.water == other.water
 
 
 class Cactus(Plant):   #仙人掌

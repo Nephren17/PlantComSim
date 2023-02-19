@@ -9,7 +9,7 @@ class Section:
         self.y=y
         self.tem=temperature[0]
         self.hum=humidity[0]
-        self.sil_hum=50
+        self.sil_hum=10000
         self.nut=100
         self.plants=[]
         self.density=0
@@ -87,4 +87,4 @@ class World:
         ax = plt.gca()
         ax.set_aspect('equal')
         plt.show()
-        plt.savefig("distribution.png")
+        plt.savefig(fname)
