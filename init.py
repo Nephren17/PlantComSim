@@ -37,17 +37,17 @@ def gen_plant(n,point,r=3):
     if n==1:
         plant=Cactus(x,y)
     elif n==2:
-        plant=Arteannuin(x,y)
-    elif n==3:
         plant=Hippophae(x,y)
+    elif n==3:
+        plant=Thorn(x,y)
     elif n==4:
-        plant=Poplar(x,y)
+        plant=Stipa(x,y)
     else:
         plant=Cactus(x,y)
     
     return plant
 
-def vis(plants,line=False,collection=["Cactus","Arteannuin","Hippophae","Poplar"]):
+def vis(plants,line=False,collection=["Cactus","Hippophae","Thorn","Stipa"]):
     plt.figure(dpi=300).set_size_inches(10,8)
     for plant in plants:
         if plant.name in collection:
