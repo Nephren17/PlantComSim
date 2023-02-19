@@ -1,6 +1,7 @@
 class Plant:
     def __init__(self,x,y,r=3) -> None:
-        self.point=(x,y) 
+        self.x = x
+        self.y = y
         self.r = r
         self.name = ""
         self.t_min=0
@@ -11,6 +12,26 @@ class Plant:
         self.l_max=0
         self.color=""
         pass
+
+    def __lt__(self, other):
+        # 比较运算符
+        return (self.x, self.y) < (other.x, other.y)
+        
+    def __sub__(self, other):
+        # 计算距离
+        return ((self.x - other.x) ** 2 + (self.y - other.y) ** 2) ** 0.5
+        
+    def __getitem__(self, index):
+        # 索引器
+        if index == 0:
+            return self.x
+        elif index == 1:
+            return self.y
+        else:
+            raise IndexError("MyPoint 只包含两个坐标值。")
+    
+    def __len__(self):
+        return 2
 
 class Cactus(Plant):   #仙人掌
     def __init__(self, x, y, r=3) -> None:

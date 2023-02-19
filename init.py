@@ -4,6 +4,7 @@ from world import *
 import random
 from scipy.spatial import KDTree
 import matplotlib.pyplot as plt
+import kdtree
 
 def generate_points(n, radius=2):
     # 随机生成第一个点
@@ -46,22 +47,36 @@ def gen_plant(n,point,r=3):
     
     return plant
 
-def vis(plants):
-    plt.figure(dpi=300).set_size_inches(8,6)
+def vis(plants,line=False):
+    plt.figure(dpi=300).set_size_inches(7,7)
     for plant in plants:
-        plt.scatter(plant.point[0],plant.point[1],c=plant.color,label=plant.name)
+        plt.scatter(plant.x,plant.y,c=plant.color,label=plant.name)
+    if line == True:
+        for i in range(0,10):
+            plt.axhline(y=i*10,color='#d9d9f3', linestyle='--')
+            plt.axvline(x=i*10,color='#d9d9f3', linestyle='--')
+
     plt.title("Distribution")
     #plt.legend()
+    plt.xlim(0,100)
+    plt.ylim(0,100)
+    ax = plt.gca()
+    ax.set_aspect('equal')
     plt.savefig("distribution.png")
 
 
 
-world = World()
-points = generate_points(50)
+points = generate_points(50)  # generate 50 random plants
 plants=[]
 for point in points:
     idx = np.random.randint(1,5)
     plant = gen_plant(idx,point,2)
     plants.append(plant)
-vis(plants=plants)
+plant_tree = kdtree.create(plants)  #kdtree 数据结构存储plant信息，便于计算相隔距离
+
+world = World(plants=plants)
+world.update_sec()
+world.debug_sec(0,0)
+vis(plants=plants,line=True)
+
 
