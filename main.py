@@ -12,8 +12,8 @@ import pickle
 
 
 temperature,humidity,_ = simulate_tropical_savanna_climate_daily()
-total=300
-plant_list = [1]*int(total*0.7) + [2]*int(total*0.1) + [3]*int(total*0.1) + [4]*int(total*0.1)
+total=1000
+plant_list = [1]*int(total*0.5) + [2]*int(total*2) + [3]*int(total*0.2) + [4]*int(total* 0.1)
 
 world=init_sp(plant_list)
 tik = 0
@@ -69,17 +69,16 @@ while 1:
     if tik > 300 or len(world.plants)==0 :
         break
 
-    last_index = None
-    for i in range(len(log)-1, -1, -1):
-        if log[i] > 0.:
-            last_index = i
+last_index = None
+for i in range(len(log)-1, -1, -1):
+    if log[i] > 0.5:
+        last_index = i
         break
 
-    if last_index is not None:
-        print("The last element greater than 0.5 is at index:", last_index)
-    else:
-        print("No element in the list is greater than 0.5")
-    
+if last_index is not None:
+    print("The last element greater than 0.5 is at index:", last_index)
+else:
+    print("No element in the list is greater than 0.5")
 
 
 
