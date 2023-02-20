@@ -15,7 +15,7 @@ temperature,humidity,_ = simulate_tropical_savanna_climate_daily()
 total=1000
 plant_list = [1]*int(total*0.5) + [2]*int(total*2) + [3]*int(total*0.2) + [4]*int(total* 0.1)
 
-world=init_sp(plant_list)
+world=init(total)
 tik = 0
 
 temp_hp_loss=0
@@ -46,15 +46,27 @@ year = 1
 log = []
 while 1:
 
-    climate = Climate(temperature[tik],humidity[tik])
+    climate = Climate(temperature[tik%360],humidity[tik%360])
     plants_iteration()
     for section in world.sections:
         sec_itr(section,climate)
+    newplants = []
+    for plant in world.plants:
+        if plant.age % plant.repro_period == 0:
+            sec = world.sections[plant.get_sec()]
+            if sec.sil_hum > 200 and sec.nut > 200:
+                newplants.append(spawn(plant))
+                sec.sil_hum = sec.sil_hum - 100
+                sec.nut = sec.nut - 100
+            #print("New plant spawned!")
+    world.plants = world.plants + newplants
+
+
 
     world.update_sec()
 
     tik = tik + 1
-
+    print(tik)
     if tik == 100:
         world.vis(fname="100",collection=["Cactus","Hippophae","Thorn","Stipa"])
         with open('possibility.txt', 'w') as file:
@@ -66,7 +78,7 @@ while 1:
             file.write(str(len(world.plants)/total)+" at day 200\n")
 
     log.append(len(world.plants)/total)
-    if tik > 300 or len(world.plants)==0 :
+    if tik > 600 or len(world.plants)==0 :
         break
 
 last_index = None
@@ -86,18 +98,19 @@ world.vis(fname="final",collection=["Cactus","Hippophae","Thorn","Stipa"])
 with open('possibility.txt', 'a') as file:
     file.write(str(len(world.plants)/total)+" at day 300\n")
 
-x_ax = range(0,301)
+x_ax = range(0,len(log))
 
 plt.figure(dpi=300).set_size_inches(8,6)
 plt.plot(x_ax,log)
 plt.xlabel("day")
 plt.ylabel("survival possibility")
+plt.title("Combination of 4 plants")
 plt.ylim(0,1.05)
 plt.xlim(0,300)
 plt.savefig("log.png")
 
-with open('data1.pkl', 'ab') as f:
-    pickle.dump(log, f)
+#with open('data1.pkl', 'ab') as f:
+#    pickle.dump(log, f)
 
 
 
