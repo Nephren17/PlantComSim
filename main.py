@@ -81,13 +81,6 @@ while 1:
     if tik > 1000 or len(world.plants)==0 :
         break
 
-   
-
-    #if last_index is not None:
-    #    print("The last element greater than 0.5 is at index:", last_index)
-    #else:
-    #    print("No element in the list is greater than 0.5")
-    
 world.vis(fname="final",collection=["Cactus","Hippophae","Thorn","Stipa"])
 
 
@@ -157,17 +150,7 @@ def comp_4plants(a:float,b:float,c:float,d:float,total=300,logfile="log.png"):
 
         tik = tik + 1
         print(tik)
-        #if tik == 100:
-            #world.vis(fname="100",collection=["Cactus","Hippophae","Thorn","Stipa"])
-        #    with open('possibility.txt', 'w') as file:
-        #        file.write(str(len(world.plants)/total)+" at day 100\n")
 
-        #if tik == 200:
-        #    #world.vis(fname="200",collection=["Cactus","Hippophae","Thorn","Stipa"])
-        #    with open('possibility.txt', 'a') as file:
-        #       file.write(str(len(world.plants)/total)+" at day 200\n")
-
-        #log.append(len(world.plants)/total)
         if tik > 800 or len(world.plants)==0 :
             return
             break

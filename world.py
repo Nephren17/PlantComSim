@@ -66,7 +66,7 @@ class World:
         sec = self.sections[x*10 + y]
         sec.print()
 
-    def vis(self,fname="distribution",line=False,collection=["Cactus","Hippophae","Thorn","Stipa"]):
+    def vis(self,fname="distribution",line=False,day=0,collection=["Cactus","Hippophae","Thorn","Stipa"]):
         plt.figure(dpi=300).set_size_inches(10,8)
         for plant in self.plants:
             if plant.name in collection:
@@ -80,7 +80,7 @@ class World:
                 plt.axhline(y=i*10,color='#d9d9f3', linestyle='--')
                 plt.axvline(x=i*10,color='#d9d9f3', linestyle='--')
 
-        plt.title("Distribution")
+        plt.title("Day"+str(day)+" Distribution")
         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left') 
         plt.xlim(0,100)
         plt.ylim(0,100)

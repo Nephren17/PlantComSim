@@ -10,10 +10,11 @@ from waether_sim import simulate_tropical_savanna_climate_daily,simulate_tempera
 from helper_func import *
 import pickle
 
-a = 0
-b = 1
-c = 0
-d = 0
+a = 0.4
+b = 0.2
+c = 0.2
+d = 0.2
+fn = "4"
 
 temperature,humidity,_ = simulate_tropical_savanna_climate_daily()
 total=300
@@ -45,7 +46,7 @@ def plants_iteration():
 def sec_itr(section:Section,climate:Climate):
     section.sil_hum=SoilHumidityIteration(section=section,climate=climate)
 
-world.vis(fname="start",collection=["Cactus","Hippophae","Thorn","Stipa"])
+world.vis(fname="start"+fn,collection=["Cactus","Hippophae","Thorn","Stipa"],day=0)
 year = 1
 log = []
 while 1:
@@ -72,10 +73,8 @@ while 1:
     tik = tik + 1
     print(tik)
     if tik == 500:
-        world.vis(fname="100",collection=["Cactus","Hippophae","Thorn","Stipa"])
-        with open('possibility.txt', 'w') as file:
-            file.write(str(len(world.plants)/total)+" at day 100\n")
-
+        world.vis(fname="500p"+fn,collection=["Cactus","Hippophae","Thorn","Stipa"],day=500)
+        
     #if tik == 200:
     #    world.vis(fname="200",collection=["Cactus","Hippophae","Thorn","Stipa"])
     #    with open('possibility.txt', 'a') as file:
@@ -92,7 +91,7 @@ while 1:
     #else:
     #    print("No element in the list is greater than 0.5")
     
-world.vis(fname="final",collection=["Cactus","Hippophae","Thorn","Stipa"])
+world.vis(fname="final"+fn,collection=["Cactus","Hippophae","Thorn","Stipa"],day=1000)
 
 
 x_ax = range(0,len(log))
@@ -106,7 +105,55 @@ plt.ylim(0,)
 plt.xlim(0,)
 plt.savefig("log1_d.png")
 
-with open('data_d.pkl', 'ab') as f:
+#with open('data_d.pkl', 'ab') as f:
+#    pickle.dump(log, f)
+
+def plant_simulation(a=0.4,b=0.2,c=0.2,d=0.2,total=300):
+    temperature,humidity,_ = simulate_tropical_savanna_climate_daily()
+    plant_list = [1]*int(total*a) + [2]*int(total*b) + [3]*int(total*c) + [4]*int(total*d)
+    world=init_sp(plant_list)
+    tik = 0
+    log = []
+    while 1:
+
+        climate = Climate(temperature[tik%360],humidity[tik%360])
+        for plant in world.plants:
+            sec = plant.get_sec()      # 返回索引
+            section = world.sections[sec]
+            neighbors = section.plants
+            plant.life = HealthPointIteration(plant,section,neighbors)
+            plant.water = WaterPointIteration(plant,section,neighbors)
+            if plant.water < 60 :
+                plant.life = plant.life + plant.water - 60
+            if plant.age_() == False:
+                world.plants.remove(plant)
+        for section in world.sections:
+            sec_itr(section,climate)
+        newplants = []
+        for plant in world.plants:
+            if plant.age % plant.repro_period == 0:
+                sec = world.sections[plant.get_sec()]
+                if sec.sil_hum > 200 and sec.nut > 200 and random.random() > 0.95:
+                    newplants.append(spawn(plant))
+                    sec.sil_hum = sec.sil_hum - 100
+                    sec.nut = sec.nut - 100
+                #print("New plant spawned!")
+        world.plants = world.plants + newplants
+
+        world.update_sec()
+
+        tik = tik + 1
+        print(tik)
+
+        log.append(len(world.plants)/total)
+        if tik > 1000 or len(world.plants)==0 :
+            break
+    return log[-1]
+
+record=[]
+for i in range(0,100):
+    record.append(plant_simulation())
+
+print(record)
+with open('success_rate.pkl', 'ab') as f:
     pickle.dump(log, f)
-
-
