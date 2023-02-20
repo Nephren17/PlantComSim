@@ -29,7 +29,7 @@ class Plant:
 
     def death(self):
         print("Plant " + self.name + " died at age" + str(self.age))
-        self.debug()
+        #self.debug()
         return
 
     def debug(self):
@@ -154,7 +154,7 @@ class Villous_themeda(Plant):   #菅子草
         self.life=100
         self.water=120
         self.water_max=120
-        self.repro_period=4
+        self.repro_period=25
         self.water_consume=5
         self.soil_consume=5
         self.color="#00303F"
@@ -212,7 +212,7 @@ class Argy(Plant):  #艾草
         self.life=100
         self.water=100
         self.water_max=100
-        self.repro_period=4
+        self.repro_period=10
         self.water_consume=5
         self.soil_consume=5
         self.color="#FA8072"
@@ -231,7 +231,7 @@ class Crofton_weed(Plant):  #紫茎泽兰
         self.life=140
         self.water=120
         self.water_max=120
-        self.repro_period= 2
+        self.repro_period=12
         self.water_consume=8
         self.soil_consume=8
         self.color="#7FFFD4"
@@ -249,7 +249,7 @@ class Leymus_chinensis(Plant):  #羊草
         self.life=100
         self.water=100
         self.water_max=100
-        self.repro_period=4
+        self.repro_period=10
         self.water_consume=5
         self.soil_consume=5
         self.color="#800080"
@@ -268,7 +268,7 @@ class Locust(Plant):  #刺槐
         self.life=14000
         self.water=15000
         self.water_max=15000
-        self.repro_period=6
+        self.repro_period=15
         self.water_consume=150
         self.soil_consume=150
         self.color="#FF00FF"
@@ -288,7 +288,7 @@ class Chinese_pennisetum(Plant):  #狼尾草
         self.life=100
         self.water=100
         self.water_max=100
-        self.repro_period=6
+        self.repro_period=20
         self.water_consume=5
         self.soil_consume=5
         self.color="#8F00FF"
@@ -306,7 +306,7 @@ class Conyza_canadensis(Plant):  #飞蓬
         self.life=100
         self.water=100
         self.water_max=100
-        self.repro_period=6
+        self.repro_period=20
         self.water_consume=6
         self.soil_consume=6
         self.color="#00FFFF"

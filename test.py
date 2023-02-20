@@ -1,6 +1,3 @@
-from main import *
-import matplotlib.pyplot as plt
-
 import numpy as np
 from plantclass import *
 from world import *
@@ -9,15 +6,14 @@ from scipy.spatial import KDTree
 import matplotlib.pyplot as plt
 import kdtree
 from init import *
-from waether_sim import simulate_tropical_savanna_climate_daily
+from waether_sim import simulate_tropical_savanna_climate_daily,simulate_temperate_grassland_climate_daily
 from helper_func import *
 import pickle
 
-logfile = "log1.png"
-a = 0.3
-b = 0.2
-c = 0.2
-d = 0.3
+a = 0
+b = 1
+c = 0
+d = 0
 
 temperature,humidity,_ = simulate_tropical_savanna_climate_daily()
 total=300
@@ -68,25 +64,28 @@ while 1:
                 sec.nut = sec.nut - 100
             #print("New plant spawned!")
     world.plants = world.plants + newplants
+
+
+
     world.update_sec()
 
     tik = tik + 1
     print(tik)
-    if tik == 100:
+    if tik == 500:
         world.vis(fname="100",collection=["Cactus","Hippophae","Thorn","Stipa"])
         with open('possibility.txt', 'w') as file:
             file.write(str(len(world.plants)/total)+" at day 100\n")
 
-    if tik == 200:
-        world.vis(fname="200",collection=["Cactus","Hippophae","Thorn","Stipa"])
-        with open('possibility.txt', 'a') as file:
-            file.write(str(len(world.plants)/total)+" at day 200\n")
+    #if tik == 200:
+    #    world.vis(fname="200",collection=["Cactus","Hippophae","Thorn","Stipa"])
+    #    with open('possibility.txt', 'a') as file:
+    #        file.write(str(len(world.plants)/total)+" at day 200\n")
 
     log.append(len(world.plants)/total)
-
     if tik > 1000 or len(world.plants)==0 :
         break
 
+   
 
     #if last_index is not None:
     #    print("The last element greater than 0.5 is at index:", last_index)
@@ -95,18 +94,19 @@ while 1:
     
 world.vis(fname="final",collection=["Cactus","Hippophae","Thorn","Stipa"])
 
+
 x_ax = range(0,len(log))
 
 plt.figure(dpi=300).set_size_inches(8,6)
 plt.plot(x_ax,log)
 plt.xlabel("day")
-plt.ylabel("survival possibility")
-plt.title("Combination of 4 plants")
+plt.ylabel("survival chance")
+plt.title("1 type of plant in desert climate")
 plt.ylim(0,)
 plt.xlim(0,)
-plt.savefig(logfile)
+plt.savefig("log1_d.png")
 
-#with open('data1.pkl', 'ab') as f:
-#    pickle.dump(log, f)
+with open('data_d.pkl', 'ab') as f:
+    pickle.dump(log, f)
 
 

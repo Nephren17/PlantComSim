@@ -75,15 +75,18 @@ def vis(plants,line=False,collection=["Cactus","Hippophae","Thorn","Stipa"]):
 def init(n):
     points = generate_points(n)  # generate 50 random plants
     plants=[]
+    plant_comb = [0,0,0,0]
     for point in points:
         idx = np.random.randint(1,5)
+        plant_comb[idx-1] = plant_comb[idx-1] + 1
         plant = gen_plant(idx,point,2)
         plants.append(plant)
     plant_tree = kdtree.create(plants)  #kdtree 数据结构存储plant信息，便于计算相隔距离
 
     world = World(plants=plants)
     world.update_sec()
-    return world
+    out = [item / n for item in plant_comb]
+    return world,out
     #world.debug_sec(0,0)
 
 def init_sp(list):
