@@ -21,7 +21,7 @@ class Climate:
 def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Plant]):
     
     # Soil Nutrient
-    HP = plant.life + 0.05 * (section.nut) + random.randint(-65, 0)
+    HP = plant.life + 0.05 * (section.nut) + random.randint(-65, 6)
     
     # Local Temperature
     if plant.t_min > section.tem:
@@ -132,7 +132,41 @@ def SoilNutrientIteration(section:Section, climate:Climate):
     
     return SN
 
-def spawn(plant:Plant,world:World,tik:int):
-    if plant.age % plant.repro_period == 0:
+
+def spawn(plant:Plant):
+    dx = random.uniform(-1,1)*10
+    dy = random.uniform(-1,1)*10
+    while plant.x + dx > 100 or plant.x + dx < 0 or plant.y + dy > 100 or plant.y + dy <0:
         dx = random.uniform(-1,1)*10
         dy = random.uniform(-1,1)*10
+    if plant.name == "Cactus":
+        newplant = Cactus(plant.x + dx,plant.y + dy)
+    elif plant.name == "Hippophae":
+        newplant = Hippophae(plant.x + dx,plant.y + dy)
+    elif plant.name == "Thorn":
+        newplant = Thorn(plant.x + dx,plant.y + dy)
+    elif plant.name == "Stipa":
+        newplant = Stipa(plant.x + dx,plant.y + dy)
+    elif plant.name == "Villous_themeda":
+        newplant = Villous_themeda(plant.x + dx,plant.y + dy)
+    elif plant.name == "Arteannuin":
+        newplant = Arteannuin(plant.x + dx,plant.y + dy)
+    elif plant.name == "Poplar":
+        newplant = Poplar(plant.x + dx,plant.y + dy)
+    elif plant.name == "Argy":
+        newplant = Argy(plant.x + dx,plant.y + dy)
+    elif plant.name == "Crofton_weed":
+        newplant = Crofton_weed(plant.x + dx,plant.y + dy)
+    elif plant.name == "Leymus_chinensis":
+        newplant = Leymus_chinensis(plant.x + dx,plant.y + dy)
+    elif plant.name == "Locust":
+        newplant = Locust(plant.x + dx,plant.y + dy)
+    elif plant.name == "Chinese_pennisetum":
+        newplant = Chinese_pennisetum(plant.x + dx,plant.y + dy)
+    elif plant.name == "Conyza_canadensis":
+        newplant = Conyza_canadensis(plant.x + dx,plant.y + dy)
+    else:
+        newplant = Cactus(plant.x + dx,plant.y + dy)
+
+    newplant.age = 0
+    return newplant

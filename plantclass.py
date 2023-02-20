@@ -29,7 +29,7 @@ class Plant:
 
     def death(self):
         print("Plant " + self.name + " died at age" + str(self.age))
-        #self.debug()
+        self.debug()
         return
 
     def debug(self):
@@ -136,7 +136,7 @@ class Stipa(Plant):   #针茅
         self.life=100
         self.water=120
         self.water_max=120
-        self.repro_period=4
+        self.repro_period=40
         self.water_consume=2
         self.soil_consume=3
         self.color="#FF5A09"
