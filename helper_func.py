@@ -21,7 +21,7 @@ class Climate:
 def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Plant]):
     
     # Soil Nutrient
-    HP = plant.life + 0.05 * (section.nut) + random.randint(-65, 6)
+    HP = plant.life + 0.05 * (section.nut) + random.randint(-65, 4)
     
     # Local Temperature
     if plant.t_min > section.tem:
@@ -55,7 +55,7 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
 def WaterPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Plant]):
 
     # Soil Humidity and Surrounding Humidity
-    WP = plant.water - random.randint(-180, 0)
+    WP = plant.water - random.randint(-200, -80)
     # Daily Consumption
     WP = WP - plant.water_consume *100
 
@@ -107,7 +107,7 @@ def SurroundingHumidityIteration(section:Section, climate:Climate):
     SuH = section.hum + 0.15 * climate.hum
     
     # Plant Density
-    SuH = SuH * (1 - 0.5 * (2 / math.pi) * math.atan(section.density / 100000))
+    SuH = SuH * (1 - 0.5 * (2 / math.pi) * math.atan(section.density / 1000))
 
     # Climate Humidity
     SuH = 0.9 * SuH + 0.1 * climate.hum
@@ -120,7 +120,7 @@ def SoilNutrientIteration(section:Section, climate:Climate):
     # Plant Reproduction
 
     # Plant consumption
-    SN = SN * (1- 0.4 * (2 / math.pi) * math.atan(section.density / 3000))
+    SN = SN * (1- 0.4 * (2 / math.pi) * math.atan(section.density / 30))
 
     #Plant Function
     for sp in section.plants:
