@@ -81,6 +81,19 @@ while 1:
     if tik > 600 or len(world.plants)==0 :
         break
 
+    last_index = None
+    for i in range(len(log)-1, -1, -1):
+        if log[i] > 0.:
+            last_index = i
+        break
+
+    if last_index is not None:
+        print("The last element greater than 0.5 is at index:", last_index)
+    else:
+        print("No element in the list is greater than 0.5")
+    
+
+
 
 world.vis(fname="final",collection=["Cactus","Hippophae","Thorn","Stipa"])
 with open('possibility.txt', 'a') as file:
@@ -99,13 +112,6 @@ plt.savefig("log.png")
 
 #with open('data1.pkl', 'ab') as f:
 #    pickle.dump(log, f)
-
-
-
-
-
-
-
 
 
 
@@ -132,4 +138,6 @@ def test_comp(plant_list):
             break
     
     return log
+
+    
 
