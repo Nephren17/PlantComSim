@@ -55,7 +55,7 @@ def HealthPointIteration(plant:Plant, section:Section, surrounding_Plants:List[P
 def WaterPointIteration(plant:Plant, section:Section, surrounding_Plants:List[Plant]):
 
     # Soil Humidity and Surrounding Humidity
-    WP = plant.water - random.randint(-180, 0)
+    WP = plant.water - random.randint(-300, 0)
     # Daily Consumption
     WP = WP - plant.water_consume *100
 
