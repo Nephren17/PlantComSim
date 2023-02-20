@@ -12,8 +12,8 @@ import pickle
 
 
 temperature,humidity,_ = simulate_tropical_savanna_climate_daily()
-total=300
-plant_list = [1]*int(total*0.7) + [2]*int(total*0.1) + [3]*int(total*0.1) + [4]*int(total*0.1)
+total=1000
+plant_list = [1]*int(total*0.5) + [2]*int(total*2) + [3]*int(total*0.2) + [4]*int(total* 0.1)
 
 world,coef=init(total)
 tik = 0
